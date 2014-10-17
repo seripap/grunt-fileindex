@@ -31,7 +31,8 @@ module.exports = function (grunt) {
 			format: 'lines',
 			sort: false,
 			absolute: false,
-			pretty: true
+			pretty: true,
+			filesOnly: true
 		});
 
 		if (typeof options.format === 'string' && !lib.formats.hasOwnProperty(options.format)) {
@@ -56,24 +57,26 @@ module.exports = function (grunt) {
 			var list = [];
 			sets++;
 
-			//grunt.log.writeln(util.inspect(f, false, 10));
-			//grunt.log.writeln(util.inspect(f.src, false, 10));
+			// grunt.log.writeln(util.inspect(f, false, 10));
+			// grunt.log.writeln(util.inspect(f.src, false, 10));
 
-			f.src.forEach(function (src) {
-				var filepath = src;
-				if (f.cwd) {
-					filepath = path.join(f.cwd, src);
-				}
-				if (options.absolute) {
-					src = path.resolve(filepath);
-				}
-				if (!grunt.file.exists(filepath)) {
-					grunt.log.warn('source file "' + filepath + '" not found.');
-					return;
-				}
-				files++;
-				list.push(src);
-			});
+			if (f.filter === "isFile") {
+				f.src.forEach(function (src) {
+					var filepath = src;
+					if (f.cwd) {
+						filepath = path.join(f.cwd, src);
+					}
+					if (options.absolute) {
+						src = path.resolve(filepath);
+					}
+					if (!grunt.file.exists(filepath)) {
+						grunt.log.warn('source file "' + filepath + '" not found.');
+						return;
+					}
+					files++;
+					list.push(src);
+				});
+			}
 
 			if (options.sort) {
 				list.sort();
