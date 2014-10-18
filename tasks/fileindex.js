@@ -84,7 +84,8 @@ module.exports = function (grunt) {
 			}
 		});
 
-		grunt.log.ok('listed ' + files + ' ' + pluralise('file', files) + ' in ' + sets + ' "' + label + '" ' + pluralise('index', sets) + '');
+		// grunt.log.ok('listed ' + files + ' ' + pluralise('file', files) + ' in ' + sets + ' ' + pluralise('index', sets) + '');
+		grunt.log.ok('Found ' + files + ' ' + pluralise('file', files) + ', generated ' + sets + ' ' + pluralise('index', sets) + '');
 
 		return true;
 	});
