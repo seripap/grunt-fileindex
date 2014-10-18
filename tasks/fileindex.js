@@ -59,24 +59,21 @@ module.exports = function (grunt) {
 
 			// grunt.log.writeln(util.inspect(f, false, 10));
 			// grunt.log.writeln(util.inspect(f.src, false, 10));
-
-			if (f.filter === "isFile") {
-				f.src.forEach(function (src) {
-					var filepath = src;
-					if (f.cwd) {
-						filepath = path.join(f.cwd, src);
-					}
-					if (options.absolute) {
-						src = path.resolve(filepath);
-					}
-					if (!grunt.file.exists(filepath)) {
-						grunt.log.warn('source file "' + filepath + '" not found.');
-						return;
-					}
-					files++;
-					list.push(src);
-				});
-			}
+			f.src.forEach(function (src) {
+				var filepath = src;
+				if (f.cwd) {
+					filepath = path.join(f.cwd, src);
+				}
+				if (options.absolute) {
+					src = path.resolve(filepath);
+				}
+				if (!grunt.file.exists(filepath)) {
+					grunt.log.warn('source file "' + filepath + '" not found.');
+					return;
+				}
+				files++;
+				list.push(src);
+			});
 
 			if (options.sort) {
 				list.sort();
